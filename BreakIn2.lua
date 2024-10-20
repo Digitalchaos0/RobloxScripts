@@ -66,20 +66,6 @@ else
 	getgenv().RemoveSlipping = false
 	getgenv().SemiGodmode = false
 
-    -- Remove Slipping Handler
-	local mt = getrawmetatable(game)
-	local old = mt.__namecall
-	setreadonly(mt, false)
-	mt.__namecall = newcclosure(function(self, ...)
-		local args = {
-			...
-		}
-		if getnamecallmethod() == 'FireServer' and self.Name == 'IceSlip' and RemoveSlipping == true then
-			return task.wait(387420489)
-		end
-		return old(self, unpack(args))
-	end)
-
     -- Semi-Godmode Handler
 	namecall = hookmetamethod(game, "__namecall", function(self, ...)
 		local args = {
